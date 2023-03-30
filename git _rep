@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "bc277d65-8864-461c-8afc-96146a949f05",
+		"name": "AZ_D8410C000001 _ Phase trigger",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26242056"
+	},
+	"item": [
+		{
+			"name": "ACTIVATION",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"    \r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"Activation\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_AC}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_AC}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"10\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_AC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_AC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_AC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.7\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_AC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_AC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Participant Training Video",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"SubjectTrainingVideo\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PTV}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PTV}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"10\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PTV}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PTV}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PTV}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n        \"TrainingVideo\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"RATDAT1S\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"{{RATDAT1S_PTV}}\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_PTV}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PTV}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Participant Training Quiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"SubjectTrainingQuiz\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PTQ}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PTQ}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"10\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PTQ}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PTQ}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PTQ}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n        \"TrainingQuiz\": {\r\n\t\t\t\"0\": [\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QUZQST5L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QUZQST3L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QUZQST4L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QUZQST1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QUZQST2L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}\r\n            ]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_PTQ}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PTQ}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Handheld Training Module",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"HHTrainingModule\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_HH}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_HH}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"{{SJ}}\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"{{PSORG}}\",\r\n\t\"ptsigprev\": \"NULL\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"20\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n        {\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_HH}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n        {\r\n            \"sysvar\": \"PT.krPHASE\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{phase_code_HH}}\",\r\n\t\t\t\"edit\": false\r\n        },\r\n        {\r\n            \"sysvar\": \"PT.Patientid\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{SJ}}\",\r\n\t\t\t\"edit\": false\r\n        },\r\n        {\r\n\t\t    \"sysvar\":\"PT.PhaseDate\",\r\n\t\t    \"krit\":\"\",\r\n\t\t    \"comment\":\"System+Generated\",\r\n\t\t    \"value\":\"{{PhaseStartDate_HH}}\",\r\n\t\t    \"edit\":true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_HH}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_HH}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n        \"HHTrainingModule\": {\r\n\t\t\t\"0\": [\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"TRNCNF1B\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}\r\n            ]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_HH}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_HH}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visit Confirmation",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"VisitConfirmation\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_VC}}\",\r\n\t\"krtz\": \"-14400000\",\r\n\t\"signingts\": \"{{SI_TI_VC}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"{{SJ}}\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"{{PSORG}}\",\r\n\t\"ptsigprev\": \"NULL\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseAtEntry_VC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_VC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n        {\r\n            \"sysvar\": \"PT.krPHASE\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{phase_code_VC}}\",\r\n\t\t\t\"edit\": false\r\n        },\r\n        {\r\n            \"sysvar\": \"PT.Patientid\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{SJ}}\",\r\n\t\t\t\"edit\": false\r\n        },\r\n        {\r\n\t\t    \"sysvar\":\"PT.PhaseDate\",\r\n\t\t    \"krit\":\"\",\r\n\t\t    \"comment\":\"System+Generated\",\r\n\t\t    \"value\":\"{{PhaseStartDate_VC}}\",\r\n\t\t    \"edit\":true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_VC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_VC}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n\t\t\"VisitConfirmation\": {\r\n\t\t\t\"0\": [\r\n                {\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"VST1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{VST1L_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"VSTCNF1D\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{VSTCNF1D_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DOSTIM1T\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{DOSTIM1T_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"VSTENT1D\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n                {\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"VISTOD1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"CNTVST1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"CYZDAT1D\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{CYZDAT1D_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STYDAY1D\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{DAY1D_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_VC}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patient Instructions",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"\r",
+							"   \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"PatientInstructions\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PI}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PI}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseAtEntry_PI}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PI}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PI}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PI}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n        \"PatientInfo\": {\r\n\t\t\t\"0\": [\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"PTIFLG1B\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}\r\n            ]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_PI}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PI}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PRO-CTAE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							"\r",
+							"   \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"PROCTCAE\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PR}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PR}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseAtEntry_PR}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PR}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PR}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PR}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n        \"PROCTCAE\": {\r\n\t\t\t\"0\": [\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"FRQVOM1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVNAU1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVABP1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"FRQHRT1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"STYDAY1N\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"{{STYDAY1N_PR}}\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"DIDRSH1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"INTFAT1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"FRQNAU1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"2\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVHRT1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"2\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"QSTWND1N\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"{{QSTWND1N_PR}}\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"FRQDIA1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"FRQABP1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVFAT1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"2\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVTFD1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"SEVVOML\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"STYPRD1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"2\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t},\r\n            {\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"INTABP1L\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}\r\n            ]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_PR}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PR}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PGI-TT",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"PGITT\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PT}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PT}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseAtEntry_PT}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PT}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PT}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PT}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"05.00\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n\t\t\"PGITT\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"QSTWND1N\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{QSTWND1N_PT}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BTHTRT1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"3\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STYDAY1N\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{STYDAY1N_PT}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STYPRD1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{STYPRD1L_PT}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"3.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"05.00\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PT}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PT}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PROMIS",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"variable = Number(pm.globals.get(\"randomNumber\"));\r",
+							"pm.globals.set(\"randomNumber\", _.random(1000000000,9999999999));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"DD-MMM-YYYY\")));\r",
+							"\r",
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentday', moment().format((\"DD+MMM+YYYY\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"    var jsonData = pm.response.json();\r",
+							"    if(jsonData.sigid){\r",
+							"        \r",
+							"        pm.test(\"The request was able to successfully submit the data\");\r",
+							"    }\r",
+							"    else{\r",
+							"        pm.test(\"The request was Failed\");\r",
+							"    }\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "servicedata={\r\n\t\"krpt\": \"{{S_KT}}\",\r\n\t\"krsu\": \"PROMIS\",\r\n\t\"krsur\": \"REPEAT_NEXT\",\r\n\t\"krse\": \"LogPad\",\r\n\t\"krser\": \"0\",\r\n\t\"krdom\": \"{{KDM}}\",\r\n\t\"krprot\": \"V1\",\r\n\t\"krsig\": \"AFFIDAVIT\",\r\n\t\"kruser\": \"WD_AZ_D8410C00001\",\r\n\t\"sigid\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigorig\": \"LA.APILoader{{randomNumber}}\",\r\n\t\"sigprev\": \"\",\r\n\t\"startts\": \"{{ST_TS_PM}}\",\r\n\t\"krtz\": \"-18000000\",\r\n\t\"signingts\": \"{{SI_TI_PM}}\",\r\n\t\"name\": \"---\",\r\n\t\"status\": \"Submitted\",\r\n\t\"subjectid\": \"\",\r\n\t\"source\": \"Handheld\",\r\n\t\"ptsigorig\": \"\",\r\n\t\"ptsigprev\": \"\",\r\n\t\"sesigorig\": \"\",\r\n\t\"sesigprev\": \"\",\r\n\t\"sysvars\": [{\r\n\t\t\t\"sysvar\": \"SU.PhaseAtEntry\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseAtEntry_PM}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.PhaseStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{PhaseStartDate_PM}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportDate_PM}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.ReportStartDate\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"{{ReportStartDate_PM}}\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.BatteryLevel\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"100\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LogPadDeviceId\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"133\",\r\n\t\t\t\"edit\": false\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"sysvar\": \"SU.LPVersion\",\r\n\t\t\t\"krit\": \"\",\r\n\t\t\t\"comment\": \"System+Generated\",\r\n\t\t\t\"value\": \"01.12\",\r\n\t\t\t\"edit\": false\r\n\t\t}\r\n\t],\r\n\t\"iglist\": {\r\n\t\t\"PROMIS\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"HLTH1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"QSTWND1N\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{QSTWND1N_PM}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STND1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"WLKM1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"2\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"UPDS1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"3\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STYDAY1N\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{STYDAY1N_PM}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DFDA1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"5\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DRSY1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"WSHD1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"5\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"STYPRD1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"{{STYPRD1L_PM}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BNDD1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"5\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t},\r\n\t\t\"DataFlag\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"QSDCOM1C\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"QSDLBL1L\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"QSDFLG1B\",\r\n\t\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\t\"value\": \"\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t},\r\n\t\t\"Protocol\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"Protocol\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"1\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"CG\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"LPARole\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"EntryMode\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\"krit\": \"EntryMode\",\r\n\t\t\t\t\"comment\": \"\",\r\n\t\t\t\t\"value\": \"0\",\r\n\t\t\t\t\"edit\": false\r\n\t\t\t}]\r\n\t\t},\r\n\t\t\"NetProInformation\": {\r\n\t\t\t\"0\": [{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.15.4\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"NPStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"1.7\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"OSVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Unknown\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserName\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"Chrome103\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"BrowserVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"103.0\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppCoreVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"2.10.1\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"LogPadAppStudyVersion\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"01.12\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"ClientID\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"APILoader\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeSubmitted\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTS_PM}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t},\r\n\t\t\t\t{\r\n\t\t\t\t\t\"sysvar\": null,\r\n\t\t\t\t\t\"krit\": \"DateTimeReceived\",\r\n\t\t\t\t\t\"comment\": null,\r\n\t\t\t\t\t\"value\": \"{{DTR_PM}}\",\r\n\t\t\t\t\t\"edit\": false\r\n\t\t\t\t}\r\n\t\t\t]\r\n\t\t}\r\n\t},\r\n\t\"ink\": null\r\n}&metadata={\r\n    \"userid\": \"WD_AZ_D8410C00001\",\r\n    \"password\": \"239e048e9dbecab39aa9825c56134824\",\r\n    \"protocol\": \"AZ_D8410C00001\",\r\n    \"method\": \"ClinSubmitRRInk.submit\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://stagevmweb2.phtstudy.com/Voltron/SWAPIServlet",
+					"protocol": "https",
+					"host": [
+						"stagevmweb2",
+						"phtstudy",
+						"com"
+					],
+					"path": [
+						"Voltron",
+						"SWAPIServlet"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "variable_key",
+			"value": ""
+		}
+	]
+}
